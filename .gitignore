@@ -1,0 +1,6 @@
+UCMerced_LandUse/
+
+__pycache__/
+*.py[cod]
+
+exercise1/work_dirs/
