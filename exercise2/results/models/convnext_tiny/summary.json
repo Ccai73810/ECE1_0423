@@ -1,0 +1,19 @@
+{
+  "model_id": "convnext_tiny",
+  "model_name": "ConvNeXt-Tiny",
+  "config_path": "D:\\ECEHW\\ECE1_0423\\exercise2\\configs\\convnext_tiny_uc_merced.py",
+  "source_config_path": "D:\\ECEHW\\ECE1_0423\\exercise1\\configs\\convnext_tiny_ucmerced.py",
+  "source_work_dir": "D:\\ECEHW\\ECE1_0423\\exercise1\\work_dirs\\convnext_tiny_ucmerced",
+  "result_dir": "D:\\ECEHW\\ECE1_0423\\exercise2\\results\\models\\convnext_tiny",
+  "work_dir": "D:\\ECEHW\\ECE1_0423\\exercise2\\results\\models\\convnext_tiny\\work_dir",
+  "best_checkpoint": "D:\\ECEHW\\ECE1_0423\\exercise1\\work_dirs\\convnext_tiny_ucmerced\\best_accuracy_top1_epoch_100.pth",
+  "best_val_top1": 98.333336,
+  "num_logged_epochs": 100,
+  "main_settings": "input=224, batch=16, lr=1e-4, epochs=100, optimizer=AdamW",
+  "notes": "Reused from exercise1; no retraining in exercise2.",
+  "raw_scalar_files": [
+    "D:\\ECEHW\\ECE1_0423\\exercise1\\work_dirs\\convnext_tiny_ucmerced\\20260418_130457\\vis_data\\scalars.json",
+    "D:\\ECEHW\\ECE1_0423\\exercise1\\work_dirs\\convnext_tiny_ucmerced\\20260418_131636\\vis_data\\scalars.json",
+    "D:\\ECEHW\\ECE1_0423\\exercise1\\work_dirs\\convnext_tiny_ucmerced\\20260418_132241\\vis_data\\scalars.json"
+  ]
+}

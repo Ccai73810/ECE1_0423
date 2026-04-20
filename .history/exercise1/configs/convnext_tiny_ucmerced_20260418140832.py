@@ -1,5 +1,4 @@
 _base_ = ["/root/mmpretrain/configs/convnext/convnext-tiny_32xb128_in1k.py"]
-# 这里我们指定了一个基础配置文件，这个文件包含了ConvNeXt Tiny模型在ImageNet数据集上的预训练配置。
 
 classes = (
     "agricultural",

@@ -1,5 +1,4 @@
 _base_ = ["/root/mmpretrain/configs/convnext/convnext-tiny_32xb128_in1k.py"]
-# 这里我们指定了一个基础配置文件，这个文件包含了ConvNeXt Tiny模型在ImageNet数据集上的预训练配置。
 
 classes = (
     "agricultural",
@@ -75,18 +74,14 @@ train_pipeline = [
         # RandAugment是一种数据增强方法，它通过随机选择和应用一系列预定义的图像变换来增强训练数据。
         # 这里我们指定了policies参数为'timm_increasing'，这是一套预定义的增强策略，包含了多种图像变换，如旋转、剪裁、颜色调整等。
         # 这些变换将被随机应用于训练图像，以增加数据的多样性，从而提高模型的泛化能力。
-        num_policies=2,  # num_policies参数指定了每个图像上应用的随机增强策略的数量。
-        # 在这个例子中，我们设置num_policies为2，表示每个图像将随机应用两种不同的增强策略。
-        total_level=10,  # total_level参数指定了增强策略的总强度级别。增强策略的强度级别通常是一个整数，表示变换的程度或幅度。
-        magnitude_level=9,  # magnitude_level参数指定了增强策略的强度级别。这个参数通常是一个整数，表示变换的程度或幅度。
-        # 在这个例子中，我们设置magnitude_level为9，表示我们希望应用较强的增强变换。
+        num_policies=2,
+        total_level=10,
+        magnitude_level=9,
         magnitude_std=0.5,
         hparams=dict(interpolation="bicubic", pad_val=[104, 116, 124]),
-        # hparams参数是一个字典，用于指定增强策略的超参数。
-        # 在这个例子中，我们指定了插值方法为双三次插值（bicubic），以及填充颜色的值为[104, 116, 124]，这通常是图像预处理中的常用填充颜色。
     ),
     dict(
-        type="RandomErasing",  # 随机擦除
+        type="RandomErasing",
         erase_prob=0.25,
         mode="rand",
         min_area_ratio=0.02,
@@ -98,7 +93,7 @@ train_pipeline = [
 ]
 
 test_pipeline = [
-    dict(type="LoadImageFromFile"),  # 载入图像
+    dict(type="LoadImageFromFile"),
     dict(
         type="ResizeEdge",
         scale=256,
@@ -106,16 +101,16 @@ test_pipeline = [
         backend="pillow",
         interpolation="bicubic",
     ),
-    dict(type="CenterCrop", crop_size=224),  # 中心裁剪图像到224x224的大小。
-    dict(type="PackInputs"),  # 将处理后的图像和标签打包成模型输入所需的格式。
+    dict(type="CenterCrop", crop_size=224),
+    dict(type="PackInputs"),
 ]
 
 train_dataloader = dict(
     batch_size=16,
-    num_workers=2,  # 数据加载时使用的工作线程数。增加num_workers可以加速数据加载过程，特别是在处理大型数据集时。
+    num_workers=2,
     dataset=dict(
         _delete_=True,
-        type="CustomDataset",  # 我们指定了数据集的类型为CustomDataset，这意味着我们将使用自定义的数据集类来加载和处理数据。
+        type="CustomDataset",
         data_root=data_root,
         ann_file="train.txt",
         data_prefix="train",
@@ -158,8 +153,6 @@ test_evaluator = val_evaluator
 
 optim_wrapper = dict(
     optimizer=dict(lr=1e-4),
-    # 学习率（learning rate）是训练神经网络时的一个重要超参数，它控制着模型权重更新的步长。
-    # 较高的学习率可能导致训练过程不稳定，甚至发散，而较低的学习率可能导致训练过程过慢，难以收敛。
 )
 
 param_scheduler = [
@@ -170,17 +163,14 @@ param_scheduler = [
         begin=0,
         end=5,
         convert_to_iter_based=True,
-    ),  # LinearLR是一种学习率调度器，它通过线性插值的方式在训练过程中调整学习率。
-    # 在这个例子中，我们设置了start_factor为1e-3，表示学习率将在训练开始时从初始学习率的0.001倍逐渐增加到初始学习率。
-    # by_epoch=True表示学习率调度器将按照训练的 epoch进行调整，begin=0和end=5表示学习率将在前5个epoch内逐渐增加。
+    ),
     dict(
         type="CosineAnnealingLR",
         eta_min=1e-6,
         by_epoch=True,
         begin=5,
         end=100,
-    ),  # CosineAnnealingLR是一种学习率调度器，它通过余弦函数的方式在训练过程中调整学习率。
-    # 在这个例子中，我们设置了eta_min为1e-6，表示
+    ),
 ]
 
 train_cfg = dict(by_epoch=True, max_epochs=100, val_interval=1)

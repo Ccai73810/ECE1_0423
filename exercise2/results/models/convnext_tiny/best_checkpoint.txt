@@ -1,0 +1,1 @@
+D:\ECEHW\ECE1_0423\exercise1\work_dirs\convnext_tiny_ucmerced\best_accuracy_top1_epoch_100.pth
